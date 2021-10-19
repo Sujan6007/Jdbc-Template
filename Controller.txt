@@ -1,0 +1,42 @@
+package com.SpringbootJdbcTemplate.jdbc;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+public class Controller {
+    @Autowired
+    Demo demo;
+
+    @GetMapping(value = "/studentname")
+    public String studentname() {
+        return "studentname";
+    }
+
+    @GetMapping(value = "studentnames")
+    public List<String> studentnames() {
+        return this.demo.getallStudentNames();
+
+    }
+//    @GetMapping(value = "banknames")
+//    public List<String> bankname() {
+//        return this.demo.getBanknames();
+
+    @PostMapping(value = "/login")
+    public String Login(@RequestBody Login login){
+        System.out.println(login.getUsername());
+        System.out.println(login.getPassword());
+        return "login is done";
+    }
+    @GetMapping(value = "params")
+    public String params(@RequestParam("name")String name){
+        return "hello"+name;
+    }
+    @GetMapping(value = "header")
+    public String header(@RequestHeader("pass")String name){
+        return "hello"+name;
+    }
+}
